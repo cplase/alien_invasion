@@ -1,6 +1,9 @@
 import sys
 import pygame
 
+from settings import Settings
+
+
 class AlienInvasion:
     """Overall class to manage game assets and behavior."""
 
@@ -10,9 +13,12 @@ class AlienInvasion:
         # Initialize background settings that Pygame needs to work properly.
         pygame.init()
         self.clock = pygame.time.Clock()
+        self.settings = Settings()
 
         # Create a display window.
-        self.screen= pygame.display.set_mode((1200, 800))
+        self.screen = pygame.display.set_mode(
+            self.settings.screen_width, self.settings.screen_height
+        )
         pygame.display.set_caption("Alien Invasion")
 
         # Set the background color.
@@ -28,7 +34,7 @@ class AlienInvasion:
                     sys.exit()
 
             # Redraw the screen during each pass through the loop.
-            self.screen.fill(self.bg_color)
+            self.screen.fill(self.settings.bg_color)
 
             # Make the most recently drawn screen visible.
             pygame.display.flip()
@@ -36,7 +42,8 @@ class AlienInvasion:
             # Set the frame rate of the game to 60 frames per second.
             self.clock.tick(60)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     # Make a game instance, and run the game.
     ai = AlienInvasion()
     ai.run_game()
